@@ -89,8 +89,15 @@ class BuildScripts(build_scripts):
                                                os_=os_,
                                                architecture=architecture)
 
+        print("Inside #_download")
+        print("url: ")
+        print(url)
+
         download_report_template = ("\t - downloading from '{0}' to '{1}'"
                                     .format(url, zip_path))
+
+        print("download_report_template")
+        print(download_report_template)
 
         def reporthoook(x, y, z):
             global download_ok
