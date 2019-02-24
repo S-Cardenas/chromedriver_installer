@@ -41,7 +41,7 @@ def get_chromedriver_version():
     global chromedriver_version
 
     print("#get_chromedriver_version")
-
+    print(CHROMEDRIVER_INFO_URL)
     response = request.urlopen(CHROMEDRIVER_INFO_URL)
     print("made response")
     content = response.read()
