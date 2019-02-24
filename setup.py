@@ -40,29 +40,17 @@ def get_chromedriver_version():
     """Retrieves the most recent chromedriver version."""
     global chromedriver_version
 
-    print("#get_chromedriver_version")
-    print("CHROMEDRIVER_INFO_URL:")
-    print(CHROMEDRIVER_INFO_URL)
     response = request.urlopen(CHROMEDRIVER_INFO_URL)
-    print("made response")
     content = response.read()
-    print("content")
     match = CROMEDRIVER_LATEST_VERSION_PATTERN.search(str(content))
-    print("match")
     if match:
         return match.group(1)
     else:
         # raise Exception('Unable to get latest chromedriver version from {0}'
         #                 .format(CHROMEDRIVER_INFO_URL))
         try:
-            print("Trying alternate method to get latest chromedriver version.")
             response = request.urlopen(CHROMEDRIVER_LATEST_RELEASE_URL)
-            print("Got second response")
             content = response.read()
-            print("Got second content.")
-            print("type content")
-            print(type(content))
-            print(str(content))
             return str(content.decode())
         except:
             raise Exception('Unable to get latest chromedriver version from {0} or {1}'
@@ -91,15 +79,8 @@ class BuildScripts(build_scripts):
                                                os_=os_,
                                                architecture=architecture)
 
-        print("Inside #_download")
-        print("url: ")
-        print(url)
-
         download_report_template = ("\t - downloading from '{0}' to '{1}'"
                                     .format(url, zip_path))
-
-        print("download_report_template")
-        print(download_report_template)
 
         def reporthoook(x, y, z):
             global download_ok
@@ -147,14 +128,10 @@ class BuildScripts(build_scripts):
         else:
             chromedriver_version = get_chromedriver_version()
 
-        print("#run chromedriver_version")
-        print(chromedriver_version)
-
         file_name = 'chromedriver_{0}.zip'.format(chromedriver_version)
         zip_path = os.path.join(tempfile.gettempdir(), file_name)
 
         if validate:
-            print('Inside validate.')
             if os.path.exists(zip_path):
                 print("\t - requested file '{0}' found at '{1}'."
                       .format(file_name, zip_path))
@@ -168,7 +145,6 @@ class BuildScripts(build_scripts):
             else:
                 self._download(zip_path, validate=True)
         else:
-            print("Inside else.")
             self._download(zip_path)
 
         self._unzip(zip_path)
