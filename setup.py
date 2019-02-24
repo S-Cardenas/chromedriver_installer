@@ -60,6 +60,7 @@ def get_chromedriver_version():
             print("Got second response")
             content = response.read()
             print("Got second content.")
+            print(str(content))
             return str(content)
         except:
             raise Exception('Unable to get latest chromedriver version from {0} or {1}'
@@ -137,10 +138,14 @@ class BuildScripts(build_scripts):
         else:
             chromedriver_version = get_chromedriver_version()
 
+        print("#run chromedriver_version")
+        print(chromedriver_version)
+
         file_name = 'chromedriver_{0}.zip'.format(chromedriver_version)
         zip_path = os.path.join(tempfile.gettempdir(), file_name)
 
         if validate:
+            print('Inside validate.')
             if os.path.exists(zip_path):
                 print("\t - requested file '{0}' found at '{1}'."
                       .format(file_name, zip_path))
@@ -154,6 +159,7 @@ class BuildScripts(build_scripts):
             else:
                 self._download(zip_path, validate=True)
         else:
+            print("Inside else.")
             self._download(zip_path)
 
         self._unzip(zip_path)
