@@ -43,16 +43,22 @@ def get_chromedriver_version():
     print("#get_chromedriver_version")
 
     response = request.urlopen(CHROMEDRIVER_INFO_URL)
+    print("made response")
     content = response.read()
+    print("content")
     match = CROMEDRIVER_LATEST_VERSION_PATTERN.search(str(content))
+    print("match")
     if match:
         return match.group(1)
     else:
         # raise Exception('Unable to get latest chromedriver version from {0}'
         #                 .format(CHROMEDRIVER_INFO_URL))
         try:
+            print("Trying alternate method to get latest chromedriver version.")
             response = request.urlopen(CHROMEDRIVER_LATEST_RELEASE_URL)
+            print("Got second response")
             content = response.read()
+            print("Got second content.")
             return str(content)
         except:
             raise Exception('Unable to get latest chromedriver version from {0} or {1}'
