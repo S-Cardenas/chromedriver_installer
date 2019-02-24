@@ -60,6 +60,8 @@ def get_chromedriver_version():
             print("Got second response")
             content = response.read()
             print("Got second content.")
+            print("type content")
+            print(type(content))
             print(str(content))
             return str(content.decode())
         except:
