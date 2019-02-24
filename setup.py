@@ -40,6 +40,8 @@ def get_chromedriver_version():
     """Retrieves the most recent chromedriver version."""
     global chromedriver_version
 
+    print("#get_chromedriver_version")
+
     response = request.urlopen(CHROMEDRIVER_INFO_URL)
     content = response.read()
     match = CROMEDRIVER_LATEST_VERSION_PATTERN.search(str(content))
