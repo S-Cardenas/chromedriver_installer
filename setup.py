@@ -61,7 +61,7 @@ def get_chromedriver_version():
             content = response.read()
             print("Got second content.")
             print(str(content))
-            return str(content)
+            return str(content).decode()
         except:
             raise Exception('Unable to get latest chromedriver version from {0} or {1}'
                         .format(CHROMEDRIVER_INFO_URL, CHROMEDRIVER_LATEST_RELEASE_URL))
